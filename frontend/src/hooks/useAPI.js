@@ -11,10 +11,10 @@ export const useConversations = (searchTerm = '') => {
     try {
       setLoading(true);
       setError(null);
-      
+
       const params = searchTerm ? { search: searchTerm } : {};
       const response = await conversationAPI.getAll(params);
-      
+
       setConversations(response.data || []);
     } catch (err) {
       setError(err.message);
@@ -31,11 +31,11 @@ export const useConversations = (searchTerm = '') => {
   const markAsRead = useCallback(async (wa_id) => {
     try {
       await conversationAPI.markAsRead(wa_id);
-      
+
       // Update local state
-      setConversations(prev => 
-        prev.map(conv => 
-          conv.wa_id === wa_id 
+      setConversations(prev =>
+        prev.map(conv =>
+          conv.wa_id === wa_id
             ? { ...conv, unread_count: 0 }
             : conv
         )
@@ -69,7 +69,7 @@ export const useMessages = (wa_id) => {
     try {
       setLoading(true);
       setError(null);
-      
+
       const response = await messageAPI.getByConversation(wa_id);
       setMessages(response.data || []);
     } catch (err) {
@@ -96,7 +96,7 @@ export const useMessages = (wa_id) => {
       };
 
       const response = await messageAPI.send(messageData);
-      
+
       // Add message to local state immediately
       if (response.data) {
         setMessages(prev => [...prev, response.data]);
@@ -117,14 +117,14 @@ export const useMessages = (wa_id) => {
       });
 
       // Update local state
-      setMessages(prev => 
-        prev.map(msg => 
+      setMessages(prev =>
+        prev.map(msg =>
           msg.id === messageId || msg.meta_msg_id === messageId
-            ? { 
-                ...msg, 
-                status, 
-                status_timestamp: new Date().toISOString() 
-              }
+            ? {
+              ...msg,
+              status,
+              status_timestamp: new Date().toISOString()
+            }
             : msg
         )
       );
@@ -152,7 +152,9 @@ export const useHealthCheck = () => {
     const checkHealth = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:5000/api/health');
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/health`
+
+        );
         setIsHealthy(response.ok);
       } catch (error) {
         setIsHealthy(false);
@@ -163,7 +165,7 @@ export const useHealthCheck = () => {
     };
 
     checkHealth();
-    
+
     // Check health every 30 seconds
     const interval = setInterval(checkHealth, 30000);
     return () => clearInterval(interval);

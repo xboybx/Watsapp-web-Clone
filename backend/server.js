@@ -9,7 +9,9 @@ const conversationRoutes = require('./routes/conversationRoutes');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ["*", ["https://watsapp-web-clone-client.onrender.com"]]
+}));
 app.use(express.json());
 
 // Routes
@@ -21,12 +23,12 @@ mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => {
-  console.log('Connected to MongoDB');
-})
-.catch((error) => {
-  console.error('MongoDB connection error:', error);
-});
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((error) => {
+    console.error('MongoDB connection error:', error);
+  });
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 // Create axios instance with default config
 const api = axios.create({
@@ -30,7 +30,7 @@ api.interceptors.response.use(
   },
   (error) => {
     console.error('API Response Error:', error.response?.data || error.message);
-    
+
     // Handle different error types
     if (error.response?.status === 401) {
       // Handle unauthorized access
@@ -39,7 +39,7 @@ api.interceptors.response.use(
       // Handle server errors
       console.error('Server error occurred');
     }
-    
+
     return Promise.reject(error);
   }
 );
