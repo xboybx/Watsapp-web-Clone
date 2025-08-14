@@ -1,0 +1,187 @@
+:root[data-theme="dark"] {
+  --bg-primary: #0a0e13;
+  --bg-secondary: #1a1f26;
+  --bg-tertiary: #252d36;
+  --bg-quaternary: #2d3740;
+  --bg-glass: rgba(26, 31, 38, 0.8);
+  --text-primary: #ffffff;
+  --text-secondary: #b8bcc8;
+  --text-tertiary: #8b949e;
+  --border-primary: rgba(255, 255, 255, 0.1);
+  --border-secondary: rgba(255, 255, 255, 0.05);
+  --accent-primary: #00d4aa;
+  --accent-secondary: #00b894;
+  --accent-tertiary: rgba(0, 212, 170, 0.1);
+  --shadow-primary: rgba(0, 0, 0, 0.3);
+  --shadow-secondary: rgba(0, 0, 0, 0.1);
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #00d4aa 0%, #00b894 100%);
+  --icon-color: #ffffff;
+  --icon-hover-color: #cccccc;
+}
+
+:root[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --bg-quaternary: #e2e8f0;
+  --bg-glass: rgba(255, 255, 255, 0.8);
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
+  --border-primary: rgba(0, 0, 0, 0.1);
+  --border-secondary: rgba(0, 0, 0, 0.05);
+  --accent-primary: #00d4aa;
+  --accent-secondary: #00b894;
+  --accent-tertiary: rgba(0, 212, 170, 0.1);
+  --shadow-primary: rgba(0, 0, 0, 0.1);
+  --shadow-secondary: rgba(0, 0, 0, 0.05);
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #00d4aa 0%, #00b894 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
+}
+
+.theme-button {
+  width: 55px;
+  height: 55px;
+  border: none;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px var(--shadow-primary);
+}
+
+.theme-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.theme-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--shadow-primary);
+  background: var(--bg-secondary);
+}
+
+.app-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+.sidebar-container {
+  width: 360px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 100;
+  border-right: 1px solid var(--border-primary);
+}
+
+.sidebar-container.closed {
+  width: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 0;
+  }
+  
+  .app-container {
+    width: 100%;
+  }
+
+  .sidebar-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    border-right: none;
+  }
+
+  .sidebar-container.open {
+    transform: translateX(0);
+  }
+
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
+  }
+
+  .theme-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .theme-button svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 3px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

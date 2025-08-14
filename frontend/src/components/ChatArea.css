@@ -1,0 +1,89 @@
+.chat-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--bg-primary);
+  position: relative;
+}
+
+.welcome-screen {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  padding: 20px;
+}
+
+.welcome-content {
+  text-align: center;
+  max-width: 400px;
+}
+
+.welcome-icon {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.welcome-logo {
+  width: 80px;
+  height: 80px;
+  background: var(--gradient-secondary);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 212, 170, 0.3);
+}
+
+.welcome-logo svg {
+  width: 48px;
+  height: 48px;
+}
+
+.welcome-content h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+
+.welcome-content p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .welcome-content {
+    padding: 16px;
+    max-width: 100%;
+  }
+
+  .welcome-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+  }
+
+  .welcome-logo svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .welcome-content h1 {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .welcome-content p {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+}
